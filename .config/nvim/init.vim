@@ -43,7 +43,7 @@ endtry
 set noshowmode    " Always show the status line
 set laststatus=2  " Don't show mode on the command line, since it's on the status line
 " }}}
-" Perfomance tweaks {{{
+" Performance tweaks {{{
 set updatetime=200  " 200ms updates instead of 4s
 " }}}
 " Folding {{{
@@ -78,6 +78,7 @@ nnoremap <Leader>c :nohlsearch<CR><C-L>
 " Easy return to normal mode
 inoremap jk <Esc>
 inoremap kj <Esc>
+inoremap <Esc> <nop>
 
 " Mnemonic maps for horizontal and vertical splits.
 nnoremap <C-w>_ :split<CR>
@@ -90,4 +91,73 @@ call plugpac#begin()
 Pack 'k-takata/minpac', {'type': 'opt'}
 " }}}
 call plugpac#end()
+" Look and feel {{{
+Pack 'gruvbox-community/gruvbox', {'type': 'opt'}
+" }}}
+" External tools {{{
+" FZF {{{
+Pack 'junegunn/fzf'     " Fuzzy file search
+Pack 'junegunn/fzf.vim'
+nnoremap <silent> <Leader>e :Files<CR>
+" }}}
+" ALE {{{
+Pack 'w0rp/ale'                                  " Linter/fixer integration
+let g:ale_loclist_msg_format='%%s (%linter%%: code%)'
+let g:ale_lint_on_text_changed=0
+let g:ale_lint_on_enter=1
+let g:ale_lint_on_save=1
+let g:ale_lint_on_insert_leave=1
+let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
+
+nnoremap ]e :ALENextWrap<CR>
+nnoremap [e :ALEPreviousWrap<CR>
+" }}}
+" gitgutter {{{
+Pack 'airblade/vim-gitgutter'                    " Git diff in margin
+let g:gitgutter_map_keys = 0  " Disable key maps
+" }}}
+Pack 'tpope/vim-fugitive'                        " Git integration
+Pack 'ludovicchabant/vim-gutentags'              " Automatic ctag management
+" }}}
+" Multi-language {{{
+" Pack 'tpope/vim-commentary'    " Language-aware commenting
+Pack 'tyru/caw.vim'
+Pack 'machakann/vim-sandwich'  " Change surrounding delimiters
+Pack 'jiangmiao/auto-pairs'
+" UltiSnips {{{
+Pack 'sirver/ultisnips'        " Snippet expansion
+let g:UltiSnipsExpandTrigger       = '<Tab>'
+let g:UltiSnipsExpandTrigger       = '<Tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
+let g:UltiSnipsSnippetDirectories  = [$VIMHOME . '/UltiSnips']
+let g:UltiSnipsEditSplit           = 'context'
+" }}}
+" tagbar {{{
+Pack 'majutsushi/tagbar'       " Tag navigation window
+nnoremap <Leader>t :TagbarToggle<CR>
+let g:tagbar_autoclose=1
+let g:tagbar_autofocus=1
+let g:tagbar_compact=1
+" }}}
+Pack 'konfekt/fastfold'        " Faster code-folding (for vimtex)
+Pack 'andymass/vim-matchup'    " More powerful matching (for vimtex)
+" vim-illuminate {{{
+Pack 'RRethy/vim-illuminate'   " Highlight word under cursor
+let g:Illuminate_delay = 50
+" }}}
+" }}}
+" Python {{{
+Pack 'tweekmonster/braceless.vim'   " Text objects and indents
+Pack 'kalekundert/vim-coiled-snake' " Folds
+" }}}
+" LaTeX {{{
+" vimtex {{{
+Pack 'lervag/vimtex'                  " Highlighting, viewer integration, commands
+let tex_flavor = 'latex'
+" }}}
+Pack 'KeitaNakamura/tex-conceal.vim'  " Improved TeX conceal
+" }}}
+" SQL {{{
+Pack 'lifepillar/pgsql.vim'  " Improved PostgreSQL highlighting
+" }}}
 " }}}
