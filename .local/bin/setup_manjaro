@@ -63,20 +63,29 @@ else
 	then
 		echo "No .dotfiles entry in .gitignore. Adding it."
 		echo ".dotfiles" >> "$GITIGNORE"
-	else
-		echo ".gitignore already contains a .dotfiles entry."
 	fi
 
-	echo "Cloning dotfiles repository."
-	#git clone --bare git@github.com:mephph/dotfiles.git "$DOTFILES"
+	echo "Cloning dotfiles repository into $DOTFILES."
+	git clone --bare git@github.com:mephph/dotfiles.git "$DOTFILES"
 fi
 echo ""
 
-if [ -e "$HOME/.zsh_aliases" ]
+ZSHRC=$HOME/.zshrc
+ALIASES=$HOME/.aliases
+if [ -e "$ALIASES" ]
 then
 	# shellcheck disable=SC1090
-	. "$HOME/.zsh_aliases"
+	. "$ALIASES"
+
+	if ! grep -q "\.aliases" "$ALIASES"
+	then
+		echo "Adding .aliases to .zshrc."
+		echo "# Addded by Charlie's setup_manjaro script." >> "$ZSHRC"
+		# shellcheck disable=SC2016
+		echo '. $HOME/.aliases' >> "$ZSHRC"
+	fi
 fi
+echo ""
 
 ################################################################################
 # Set up Neovim and plugins
@@ -102,7 +111,7 @@ fi
 if [ -e "$NVIM/init.vim" ] && grep -q "Pack 'k-takata/minpac'" "$NVIM/init.vim"
 then
 	echo "Found init.vim and plugpac setup command. Running nvim and installing plugins."
-	echo "If you get 'E492: Not an editor command: PackInstall' then plugpac plugpac setup is wrong."
+	echo "If you get 'E492: Not an editor command: PackInstall' then plugpac is not configured correctly in init.vim."
 	nvim -c :PackInstall
 	echo ""
 fi
