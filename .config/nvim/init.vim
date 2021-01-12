@@ -64,7 +64,6 @@ set smartcase  " Unless the pattern contains upper case
 nnoremap <Leader>c :nohlsearch<CR><C-L>
 "}}}
 " Spell check {{{
-set spell             " Enable spell-checking
 set spelllang=en_ca   " Spelling in English
 set spellsuggest=best " Fast suggestions for English
 "}}}
@@ -78,7 +77,6 @@ nnoremap <Leader>c :nohlsearch<CR><C-L>
 " Easy return to normal mode
 inoremap jk <Esc>
 inoremap kj <Esc>
-inoremap <Esc> <nop>
 
 " Mnemonic maps for horizontal and vertical splits.
 nnoremap <C-w>_ :split<CR>
@@ -117,11 +115,9 @@ Pack 'airblade/vim-gitgutter'                    " Git diff in margin
 let g:gitgutter_map_keys = 0  " Disable key maps
 " }}}
 Pack 'tpope/vim-fugitive'                        " Git integration
-Pack 'ludovicchabant/vim-gutentags'              " Automatic ctag management
 " }}}
 " Multi-language {{{
-" Pack 'tpope/vim-commentary'    " Language-aware commenting
-Pack 'tyru/caw.vim'
+Pack 'tyru/caw.vim'            " Language-aware commenting
 Pack 'machakann/vim-sandwich'  " Change surrounding delimiters
 Pack 'jiangmiao/auto-pairs'
 " UltiSnips {{{

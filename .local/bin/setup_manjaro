@@ -17,7 +17,7 @@ PACKAGES="$PACKAGES rust python python-pip shellcheck"
 
 if ! pamac list --installed | grep -q neovim-nightly
 then
-	PACKAGES_AUR="$PACKAGES_AUR neovim-nightly"
+	PACKAGES_AUR="$PACKAGES_AUR neovim-nightly universal-ctags-git"
 fi
 
 # Document preparation
